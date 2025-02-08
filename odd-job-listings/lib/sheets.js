@@ -10,9 +10,18 @@ export async function getJobsFromGoogleSheet() {
       throw new Error('Failed to fetch jobs data from Google Sheets');
     }
     const data = await res.json();
+
+    if (!data.values || data.values.length === 0) {
+        return [];
+      }
   
     // The first row is assumed to be headers.
     const [headers, ...rows] = data.values;
+
+    if (!headers || headers.length === 0) {
+        return [];
+      }
+
     const jobs = rows.map((row) => {
       let job = {};
       headers.forEach((header, index) => {
