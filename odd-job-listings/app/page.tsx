@@ -17,15 +17,16 @@ export default async function Home() {
       </Typography>
 
       <Grid container spacing={4} justifyContent="center">
-        {jobs.map((job) => (
-          <Grid item key={job.id || job.title} xs={12} sm={6} md={4} lg={3}>
-            <JobPost
-              title={job.title}
-              reward={Number(job.reward)}
-              description={job.description}
-            />
-          </Grid>
-        ))}
+      {jobs.map((job) => (
+        <Grid item key={job.id || job.title} xs={12} sm={6} md={4} lg={3}>
+          <JobPost
+            id={job.id}
+            title={job.title}
+            reward={Number(job.reward)}
+            description={job.description}
+          />
+        </Grid>
+      ))}
       </Grid>
     </Container>
   );
