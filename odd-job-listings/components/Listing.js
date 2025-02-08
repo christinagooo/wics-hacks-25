@@ -9,6 +9,9 @@ import { Box, Card, CardContent, Typography, Button } from '@mui/material';
 
 const Listing = ({ id, title, reward }) => {
   const router = useRouter();
+  const handleDone = async (id) => {
+    return;
+  };
 
   return (
     <div className="w-full flex justify-center p-4">
@@ -21,7 +24,9 @@ const Listing = ({ id, title, reward }) => {
           <Typography variant="body2" color="text.secondary">
             hello
           </Typography>
-          <Button variant="contained" color="error" sx={{ mt: 3 }}>
+          <Button 
+            onClick={handleDone}
+            variant="contained" color="error" sx={{ mt: 3 }}>
             Done
           </Button>
         </CardContent>
