@@ -2,7 +2,7 @@
 export async function getJobsFromGoogleSheet() {
     const spreadsheetId = "1KvbZ7lOh88dJ0MAF96izUOyZKuHH_oWDpKWQZsYebNI";
     const apiKey = "AIzaSyD5m8SkmN9xNh8mGNvM4gRlWqQPxqXKRB4";
-    const range = 'Sheet1!A1:D100'; // Adjust this range to match your sheet
+    const range = 'Sheet2!A1:D100'; 
     const url = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${range}?key=${apiKey}`;
   
     const res = await fetch(url);

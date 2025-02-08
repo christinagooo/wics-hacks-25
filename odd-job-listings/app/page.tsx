@@ -21,7 +21,7 @@ export default async function Home() {
           <Grid item key={job.id || job.title} xs={12} sm={6} md={4} lg={3}>
             <JobPost
               title={job.title}
-              reward={Number(job.reward)} // Convert reward to a number if needed
+              reward={Number(job.reward)}
               description={job.description}
             />
           </Grid>
