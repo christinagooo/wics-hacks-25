@@ -46,11 +46,19 @@ export default function Home() {
       >
         Western West Job Board
       </Typography> */}
-      <img
+      {/* <img
         src="/yeehire.png"
         alt="Yeehire"
-        className=" h-10 w-10 max-h-none"
-      />
+        width="200px"
+      /> */}
+      <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+        <img
+          src="/yeehire.png"
+          alt="Yeehire"
+          style={{ width: "400px", height: "auto", marginBottom: "10px" }} // ✅ Increase size & keep aspect ratio
+        />
+      </div>
+
 
       <Grid container spacing={4} justifyContent="center">
         {jobs.map((job) => (
