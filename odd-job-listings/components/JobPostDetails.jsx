@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from 'react';
-import { Box, Card, CardContent, Typography, Button, Chip } from '@mui/material';
+import { Box, Card, CardContent, Typography, Button, CardMedia, Chip } from '@mui/material';
 import { useRouter } from 'next/navigation';
 
 const JobPostDetails = ({
@@ -50,6 +50,7 @@ const JobPostDetails = ({
       if (res.ok) {
         // Refresh the page to update the list after accepting the job
         setIsAccepted(true);
+        alert('You\'ve successfully accepted this job!');
         router.refresh();
       } else {
         const data = await res.json();
@@ -146,6 +147,45 @@ const JobPostDetails = ({
               ${reward}
             </Typography>
 
+            {/* Skillset */}
+            <Typography variant="body2" className="mt-3 font-semibold text-blue-500" sx={{
+              fontFamily: "Courier New, monospace",
+              fontSize: ".8rem",
+              color: "black",
+              mt: 1,
+              textAlign: "left",
+              transition: 'transform 0.2s ease-in-out',
+              '&:hover': { transform: 'scale(1.05)' },
+            }}>
+              📋 {skillset}
+            </Typography>
+
+            {/* City */}
+            <Typography variant="body2" className="mt-3 font-semibold text-blue-500" sx={{
+              fontFamily: "Courier New, monospace",
+              fontSize: ".8rem",
+              color: "black",
+              mt: 1,
+              textAlign: "left",
+              transition: 'transform 0.2s ease-in-out',
+              '&:hover': { transform: 'scale(1.05)' },
+            }}>
+              📍 {city}
+            </Typography>
+
+            {/* Hirer */}
+            <Typography variant="body2" className="mt-3 font-semibold text-blue-500" sx={{
+              fontFamily: "Courier New, monospace",
+              fontSize: ".8rem",
+              color: "black",
+              mt: 1,
+              textAlign: "left",
+              transition: 'transform 0.2s ease-in-out',
+              '&:hover': { transform: 'scale(1.05)' },
+            }}>
+              🤠 {hirer}
+            </Typography>
+
           {/* Accept Button */}
           <Button
             variant="contained"
@@ -172,6 +212,7 @@ const JobPostDetails = ({
         </CardContent>
       </Card>
     </Box>
+    </>
   );
 };
 

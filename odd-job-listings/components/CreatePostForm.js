@@ -11,6 +11,7 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { Typography } from "@mui/material";
 // Import the USERNAME constant to auto-populate the hirer field
 import { USERNAME } from "@/data/user";  // Adjust the import path as needed
 
@@ -150,29 +151,40 @@ const CreatePostForm = () => {
 
         {/* New: Skillset Dropdown */}
         <FormControl fullWidth>
-          <FormLabel>Skillset</FormLabel>
+          <FormLabel sx={{ 
+            fontWeight: "bold", 
+            fontFamily: "Courier New, monospace",
+            color: "#ff7a5c",
+            mb: 1,
+            "&.Mui-focused": { color: "#ff7a5c" },
+          }}>Skillset</FormLabel>
           <Select
             value={skillset}
             onChange={(e) => setSkillset(e.target.value)}
+            sx={{
+              "& .MuiSelect-select": {color: "#ff7a5c", fontStyle: "normal"},
+            }}
             displayEmpty
             required
           >
-            <MenuItem value=""><em>Select a category</em></MenuItem>
-            <MenuItem value="art">Art</MenuItem>
-            <MenuItem value="coding">Coding</MenuItem>
-            <MenuItem value="music">Music</MenuItem>
-            <MenuItem value="cooking">Cooking</MenuItem>
+            <MenuItem value="" sx={{backgroundColor: "#f9f9f9", color: "#ff7a5c"}}>Select a category</MenuItem>
+            <MenuItem value="mechanics">Art</MenuItem>
+            <MenuItem value="cleaning">Coding</MenuItem>
+            <MenuItem value="animals">Music</MenuItem>
+            <MenuItem value="art">Cooking</MenuItem>
             <MenuItem value="hunting">Hunting</MenuItem>
           </Select>
         </FormControl>
 
         {/* New: City TextField */}
         <FormControl fullWidth>
-          <FormLabel>City</FormLabel>
+        <FormLabel sx={{ fontWeight: "bold", fontFamily: "Courier New, monospace",
+            color: "#ff7a5c", mb: 1 }}>City</FormLabel>
           <TextField
             placeholder="City"
             required
             onChange={(e) => setCity(e.target.value)}  
+            sx={{ backgroundColor: "#f9f9f9"}}
           />
         </FormControl>
 

@@ -31,7 +31,7 @@ export default function Home() {
       } catch (err) {
         console.error(err);
       }
-    }, 1000);
+    }, 6000);
     return () => clearInterval(interval);
   }, []);
 
@@ -53,7 +53,7 @@ export default function Home() {
       /> */}
       <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
         <img
-          src="/yeehire.png"
+          src="/yeehire-white.png"
           alt="Yeehire"
           style={{ width: "400px", height: "auto", marginBottom: "10px" }} // ✅ Increase size & keep aspect ratio
         />

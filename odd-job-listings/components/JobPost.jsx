@@ -32,6 +32,7 @@ const JobPost = ({ id, title, reward, description, imageUrl, hirer, skillset, ci
       });
       if (res.ok) {
         setIsAccepted(true);
+        // alert('You\'ve successfully accepted this job!');
         router.refresh();
       } else {
         const data = await res.json();

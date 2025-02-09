@@ -33,7 +33,7 @@ export default function Chicken( {randomY} ) {
         repeat: -1,            // Infinite looping
         // delay: randomDelay,    // Random delay
         onRepeat: () => {
-          let rand = Math.floor(Math.random() * (pageHeight-50)) + 50
+          let rand = Math.floor(Math.random() * (pageHeight*4)) + 50
           setRandomY(rand);
           console.log("randomY", rand);
           gsap.set(chicken, { x: screenWidth + 100 })
