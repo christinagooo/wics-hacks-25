@@ -5,6 +5,15 @@ import { Card, CardContent, Typography, Button, Modal } from '@mui/material';
 import { useState } from 'react';
 import JobPostDetails from './JobPostDetails';
 
+// In your JobPost component or a global layout file
+import { Smokum } from 'next/font/google';
+
+const smokum = Smokum({
+  weight: '400',
+  subsets: ['latin'],
+});
+
+
 const JobPost = ({ id, title, reward, description, imageUrl }) => {
   const router = useRouter();
   const [isAccepting, setIsAccepting] = useState(false);
@@ -43,30 +52,37 @@ const JobPost = ({ id, title, reward, description, imageUrl }) => {
 
   return (
     <>
-    <Card
-      sx={{
-        width: 280,
-        height: 360,
-        border: "4px solid black",
-        backgroundColor: "#f5deb3",
-        boxShadow: "5px 5px 15px rgba(0, 0, 0, 0.3)",
-        textAlign: "center",
-        fontFamily: "serif",
-        cursor: "pointer",
-        transition: "transform 0.2s ease-in-out",
-        "&:hover": { transform: "scale(1.05)" },
-      }}
-      onClick={() =>
-        setOpenCardModal(true)
-        // router.push(
-        //   `/job-detail?title=${encodeURIComponent(title)}&reward=${encodeURIComponent(reward)}&description=${encodeURIComponent(description)}`
-        // )
-      }
-    >
+      <Card
+        // Optionally apply the custom font class name from next/font:
+        className={smokum.className}
+        sx={{
+          width: 280,
+          height: 360,
+          border: '4px solid black',
+          // A fallback background color in case the image fails to load:
+          backgroundColor: '#f5deb3',
+          // Paper texture background image:
+          backgroundImage: `url("https://lh5.googleusercontent.com/proxy/qGNdaFF6IZyw7tmekZuzCPixFa1VntC_0O8jklVahcxIC1vb5PZgy6dmXuMyN2mQ_2NUhM6BZNtNA20F6SfispoivKpkxrReGcCPnnezeodN542dH_1WMV5srF_NEayj1IdTPWt0")`,
+          backgroundSize: 'cover',
+          backgroundRepeat: 'no-repeat',
+          backgroundPosition: 'center',
+          boxShadow: '5px 5px 15px rgba(0, 0, 0, 0.3)',
+          textAlign: 'center',
+          // If you’re not using the next/font class, you can also set the font directly:
+          // fontFamily: "'Great Vibes', cursive",
+          cursor: 'pointer',
+          transition: 'transform 0.2s ease-in-out',
+          '&:hover': { transform: 'scale(1.05)' },
+        }}
+        onClick={() => setOpenCardModal(true)}
+      >
       <CardContent>
-        <Typography variant="h4" sx={{ color: "darkred", fontWeight: "bold", letterSpacing: 2 }}>
-          WANTED
-        </Typography>
+          <Typography
+              variant="h4"
+              sx={{ color: 'darkred', fontWeight: 'bold', letterSpacing: 2, fontFamily: smokum.style.fontFamily, }}
+            >
+            WANTED
+          </Typography>
         <Typography variant="h5" sx={{ fontWeight: "bold", mt: 2 }}>
           {title}
         </Typography>
