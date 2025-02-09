@@ -36,13 +36,22 @@ export default function Home() {
   }, []);
 
   return (
+    <div>
+      {/* <h1>hello</h1> */}
+    
     <Container sx={{ paddingY: 8 }}>
-      <Typography
+      {/* <Typography
         variant="h4"
         sx={{ fontWeight: 'bold', marginBottom: 4, textAlign: 'center' }}
       >
         Western West Job Board
-      </Typography>
+      </Typography> */}
+      <img
+        src="/yeehire.png"
+        alt="Yeehire"
+        className=" h-10 w-10 max-h-none"
+      />
+
       <Grid container spacing={4} justifyContent="center">
         {jobs.map((job) => (
           <Grid item key={job.id || job.title} xs={12} sm={6} md={4} lg={3}>
@@ -60,5 +69,10 @@ export default function Home() {
         ))}
       </Grid>
     </Container>
+      <div>
+        {/* <Background /> */}
+      </div>
+    
+    </div>
   );
 }
