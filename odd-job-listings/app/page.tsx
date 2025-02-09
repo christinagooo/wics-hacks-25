@@ -24,7 +24,7 @@ export default async function Home() {
             title={job.title}
             reward={Number(job.reward)}
             description={job.description}
-            imageUrl={job.imageUrl}
+            imageUrl={job.imageurl}
           />
         </Grid>
       ))}
