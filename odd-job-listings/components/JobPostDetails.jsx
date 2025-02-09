@@ -32,7 +32,7 @@ const JobPostDetails = ({id, title, reward, description, imageUrl, isAccepting, 
     }
   };
 
-
+  console.log("imageUrl", imageUrl)
   return (
     <>
       <Box

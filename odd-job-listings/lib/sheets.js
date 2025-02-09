@@ -2,7 +2,7 @@
 export async function getJobsFromGoogleSheet() {
     const spreadsheetId = process.env.GOOGLE_SHEET_ID;
     const apiKey = process.env.GOOGLE_SHEETS_API_KEY;
-    const range = 'Sheet2!A1:D100'; 
+    const range = 'Sheet2!A1:G100'; 
     const url = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${range}?key=${apiKey}`;
   
     const res = await fetch(url);
@@ -26,6 +26,8 @@ export async function getJobsFromGoogleSheet() {
       let job = {};
       headers.forEach((header, index) => {
         job[header.toLowerCase()] = row[index];
+        console.log(header.toLowerCase());
+        // console.log(job[header.toLowerCase()]);
       });
       return job;
     });

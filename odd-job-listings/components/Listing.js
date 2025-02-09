@@ -18,10 +18,10 @@ const Listing = ({ id, title, reward, buttonType }) => {
   const handleCancel = async (id) => {};
 
   const renderButton = () => {
-    console.log("buttonType in switch is", buttonType, "type is", typeof buttonType);
+    // console.log("buttonType in switch is", buttonType, "type is", typeof buttonType);
     switch (buttonType.buttonType) {
       case 2:
-        console.log("active-hirer");
+        // console.log("active-hirer");
         return (
           <Button variant="outlined" color="primary" onClick={handleDone}>
             Done
