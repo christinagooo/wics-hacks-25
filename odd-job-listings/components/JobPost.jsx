@@ -14,15 +14,12 @@ const smokum = Smokum({
 });
 
 
-const JobPost = ({ id, title, reward, description, imageUrl }) => {
+const JobPost = ({ id, title, reward, description, imageUrl, hirer, skillset, city }) => {
   const router = useRouter();
   const [isAccepting, setIsAccepting] = useState(false);
   const [isAccepted, setIsAccepted] = useState(false);
 
   const [openCardModal, setOpenCardModal] = useState(false);
-
-  // const handleOpenCardModal = () => setOpenCardModal(true);
-  // const handleCloseCardModal = () => setOpenCardModal(false);
 
   const handleAccept = async (e) => {
     e.stopPropagation(); // prevent the card's onClick (if any) from firing
@@ -34,9 +31,8 @@ const JobPost = ({ id, title, reward, description, imageUrl }) => {
         body: JSON.stringify({ jobId: id }),
       });
       if (res.ok) {
-        alert('Job accepted and removed!');
-        // Optionally, refresh the page or remove the job from local state
-        // e.g., router.refresh() if using Next.js 13 App Router.
+        setIsAccepted(true);
+        router.refresh();
       } else {
         const data = await res.json();
         alert('Error accepting job: ' + data.error);
@@ -46,14 +42,12 @@ const JobPost = ({ id, title, reward, description, imageUrl }) => {
       alert('An error occurred.');
     } finally {
       setIsAccepting(false);
-      setIsAccepted(true);
     }
   };
 
   return (
     <>
       <Card
-        // Optionally apply the custom font class name from next/font:
         className={smokum.className}
         sx={{
           width: 280,
@@ -68,8 +62,6 @@ const JobPost = ({ id, title, reward, description, imageUrl }) => {
           backgroundPosition: 'center',
           boxShadow: '5px 5px 15px rgba(0, 0, 0, 0.3)',
           textAlign: 'center',
-          // If you’re not using the next/font class, you can also set the font directly:
-          // fontFamily: "'Great Vibes', cursive",
           cursor: 'pointer',
           transition: 'transform 0.2s ease-in-out',
           '&:hover': { transform: 'scale(1.05)' },
@@ -115,6 +107,9 @@ const JobPost = ({ id, title, reward, description, imageUrl }) => {
         reward={reward}
         description={description}
         imageUrl={imageUrl}
+        hirer={hirer}
+        skillset={skillset}
+        city={city}
         isAccepting={isAccepting}
         setIsAccepting={setIsAccepting}
         isAccepted={isAccepted}

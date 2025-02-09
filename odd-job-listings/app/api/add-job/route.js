@@ -1,10 +1,11 @@
-// app/api/accept-job/route.js
+// app/api/add-job/route.js
+
 import { google } from 'googleapis';
 import { NextResponse } from 'next/server';
 
 export async function POST(req) {
   console.log("add-job POST request received");
-  const { jobId, title, reward, description, imageUrl } = await req.json();
+  const { jobId, title, reward, description, imageUrl, hirer, skillset, city } = await req.json();
 
   try {
     const auth = new google.auth.GoogleAuth({
@@ -16,10 +17,9 @@ export async function POST(req) {
     });
 
     const sheets = google.sheets({ version: 'v4', auth });
-    const spreadsheetId = process.env.GOOGLE_SHEET_ID;
+    const spreadsheetId = process.env.NEXT_PUBLIC_GOOGLE_SHEET_ID;
 
     // Retrieve spreadsheet metadata to get the correct sheetId for "Sheet2"
-    // ASSUMES SHEET2 CONTAINS ALL ACTIVE JOBS
     const meta = await sheets.spreadsheets.get({ spreadsheetId });
     const sheetInfo = meta.data.sheets.find(
       (sheet) => sheet.properties.title === "Sheet2"
@@ -27,22 +27,19 @@ export async function POST(req) {
     if (!sheetInfo) {
       return NextResponse.json({ error: 'Sheet2 not found' }, { status: 404 });
     }
-    const sheetId = sheetInfo.properties.sheetId;
-
-
-    // const sheets = google.sheets({ version: "v4", auth });
+    // Append the new row to Sheet2 with columns:
+    // ID, Title, Reward, Description, Imageurl, hirer, skillset, city
     await sheets.spreadsheets.values.append({
       spreadsheetId,
-      range: `Sheet2!A:E`, // Columns A-E
+      range: `Sheet2!A:H`, // Adjusted range for 8 columns (A through H)
       valueInputOption: "RAW",
       requestBody: {
-        values: [[jobId, title, reward, description, imageUrl]], // New row data
+        values: [[jobId, title, reward, description, imageUrl, hirer, skillset, city]],
       },
     });
-    return Response.json({ message: "Row added successfully!" }, { status: 201 });
+    return NextResponse.json({ message: "Row added successfully!" }, { status: 201 });
   } catch (error) {
     console.error("Error adding row to Google Sheets:", error);
-    return Response.json({ error: "Failed to add row" }, { status: 500 });
+    return NextResponse.json({ error: "Failed to add row" }, { status: 500 });
   }
-
 }

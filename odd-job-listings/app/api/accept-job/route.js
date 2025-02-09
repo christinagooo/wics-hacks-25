@@ -2,6 +2,7 @@
 
 import { google } from 'googleapis';
 import { NextResponse } from 'next/server';
+import { USERNAME } from '@/data/user'; // Adjust the path if necessary
 
 export async function POST(req) {
   try {
@@ -21,7 +22,7 @@ export async function POST(req) {
     });
 
     const sheets = google.sheets({ version: 'v4', auth });
-    const spreadsheetId = process.env.GOOGLE_SHEET_ID;
+    const spreadsheetId = process.env.NEXT_PUBLIC_GOOGLE_SHEET_ID;
 
     // Retrieve spreadsheet metadata to get the correct sheetIds for "Sheet2" and "Sheet3"
     const meta = await sheets.spreadsheets.get({ spreadsheetId });
@@ -47,7 +48,7 @@ export async function POST(req) {
     // Retrieve Sheet2's data to determine which row to move.
     const getRes = await sheets.spreadsheets.values.get({
       spreadsheetId,
-      range: 'Sheet2!A:D', // Adjust the range if necessary.
+      range: 'Sheet2!A:H', // Adjust the range if necessary.
     });
     const rows = getRes.data.values;
     if (!rows || rows.length === 0) {
@@ -71,13 +72,16 @@ export async function POST(req) {
     }
 
     // Append the found row data to Sheet3.
-    // This will add the row data at the bottom of Sheet3.
+    // Since Sheet3 has an extra column ("hiree"), append USERNAME to the row.
+    const newRowData = [...rowData, USERNAME];
+
+    // Update the range to include the extra column (e.g., columns A to I)
     await sheets.spreadsheets.values.append({
       spreadsheetId,
-      range: 'Sheet3!A:D',
+      range: 'Sheet3!A:I',
       valueInputOption: 'USER_ENTERED', // or "RAW" if preferred
       requestBody: {
-        values: [rowData],
+        values: [newRowData],
       },
     });
 
@@ -112,5 +116,3 @@ export async function POST(req) {
     );
   }
 }
-
-

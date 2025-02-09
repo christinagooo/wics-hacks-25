@@ -20,7 +20,7 @@ export default function NavBar() {
         <Box
           sx={{ flexGrow: 1}}
         >
-          <Button color="inherit" href="/">OddJobs</Button>
+          <Button color="inherit" href="/">Yeehire</Button>
         </Box>
 
           <IconButton
