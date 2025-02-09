@@ -60,9 +60,9 @@ export default function Home() {
       </div>
 
 
-      <Grid container spacing={4} justifyContent="center">
+      <Grid container spacing={2} justifyContent="center">
         {jobs.map((job) => (
-          <Grid item key={job.id || job.title} xs={12} sm={6} md={4} lg={3}>
+          <Grid item key={job.id || job.title} xs={12} sm={6} md={5} lg={4}>
             <JobPost
               id={job.id}
               title={job.title}

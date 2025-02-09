@@ -29,11 +29,11 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <div className="bg-pattern">
+        <div className="bg-pattern" style={{overflow:"hidden"}}>
           {/* Background Container */}
             <div className="absolute inset-0 w-full h-full -z-10 bg-transparent"
               style={{
-                top:"1000px"
+                // top:"1000px"
               }}>
               <Background />
             </div>
