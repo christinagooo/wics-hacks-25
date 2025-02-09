@@ -140,11 +140,13 @@ const JobPost = ({ id, title, reward, description, imageUrl, hirer, skillset, ci
             mt: 2,
             position: "absolute",
             // bottom: "10px",
-            opacity: hovered ? 1 : 0, // Start hidden
+            opacity: hovered | isAccepted ? 1 : 0, // Start hidden
             // visibility: hovered ? "visible" : "hidden", // ✅ Prevents interaction when hidden
-            transform: hovered ? "translateY(0)" : "translateY(10px)", // ✅ Move up when appearing
+            transform: hovered | isAccepted ? "translateY(0)" : "translateY(10px)", // ✅ Move up when appearing
             transition: "opacity 0.3s ease-in-out, transform 0.3s ease-in-out, visibility 0.3s", // ✅ Smooth transition
+          
           }}
+          // disabled={isAccepting | isAccepted }
         >
           {isAccepting ? "Accepting..." : (isAccepted ? "Accepted" : "Accept")}
         </Button>

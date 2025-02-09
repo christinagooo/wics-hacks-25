@@ -87,32 +87,79 @@ const JobPostDetails = ({
       
       >
         <Card className="shadow-md"
-        
+          sx={{
+            width: "100%",
+            height: "100%",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
+            p: 2,
+            boxShadow: 3,
+          }}
         >
-          <CardContent>
-            <img src={imageUrl} alt={title} className="w-full h-48 object-cover" />
-          </CardContent>
-          <CardContent>
+          <CardMedia
+            component="img"
+            src={imageUrl}
+            alt={title}
+            sx={{
+              height: "50%", // Adjust image size dynamically
+              objectFit: "cover",
+              borderRadius: 2,
+            }}
+          />
+          <CardContent sx={{ flexGrow: 1 }}>
             {/* Job Title */}
-            <Typography id="job-title" variant="h5" className="font-bold text-gray-900">
+            <Typography id="job-title" variant="h5" className="font-bold text-gray-900" sx={{
+              fontFamily: "Courier New, monospace",
+              fontSize: "1.5rem",
+              fontWeight: "bold",
+              color: "#ff7a5c",
+              transition: 'transform 0.2s ease-in-out',
+              '&:hover': { transform: 'scale(1.05)' },
+            }}>
               {title}
             </Typography>
 
-          {/* Job Description */}
-          <Typography variant="body2" className="mt-2 text-gray-700">
-            {description}
-          </Typography>
+            {/* Job Description */}
+            <Typography variant="body2" className="mt-2 text-gray-700" sx={{
+              fontFamily: "Courier New, monospace",
+              fontSize: "1.2rem",
+              color: "black",
+              transition: 'transform 0.2s ease-in-out',
+              '&:hover': { transform: 'scale(1.05)' },
+            }}>
+              {description}
+            </Typography>
 
-          {/* Reward */}
-          <Typography variant="body2" className="mt-3 font-semibold text-blue-500">
-            💰 Reward: ${reward}
-          </Typography>
+            {/* Compensation */}
+            <Typography variant="body2" className="mt-3 font-semibold text-blue-500" sx={{
+              fontFamily: "Courier New, monospace",
+              fontSize: "1.2rem",
+              color: "black",
+              transition: 'transform 0.2s ease-in-out',
+              '&:hover': { transform: 'scale(1.05)' },
+            }}>
+              Reward: ${reward}
+            </Typography>
 
           {/* Accept Button */}
           <Button
             variant="contained"
             color="primary"
-            sx={{ mt: 2 }}
+            sx={{ 
+              mt: 2,
+              borderRadius: "50px", // ✅ Makes the button rounder
+              fontFamily: "Courier New, monospace", // ✅ Custom font
+              fontSize: "1.2rem", // ✅ Larger font
+              backgroundColor: "#ff7a5c", // ✅ Custom color (orange-red)
+              color: "white", // ✅ Text color
+              padding: "10px 20px", // ✅ Adjust padding
+              "&:hover": {
+                backgroundColor: "#FF5733", // ✅ Custom color (orange-red)
+              },
+              transition: 'transform 0.2s ease-in-out',
+              '&:hover': { transform: 'scale(1.05)' },
+            }}
             onClick={handleAccept}
             disabled={isAccepting || isAccepted}  // Use logical OR for proper boolean evaluation
           >
