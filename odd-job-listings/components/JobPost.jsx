@@ -113,6 +113,16 @@ const JobPost = ({ id, title, reward, description, imageUrl, hirer, skillset, ci
           // color="primary"
           onClick={handleAccept}
           sx={{
+            borderRadius: "50px", // ✅ Makes the button rounder
+            fontFamily: "Courier New, monospace", // ✅ Custom font
+            fontSize: "1.2rem", // ✅ Larger font
+            backgroundColor: "#FF5733", // ✅ Custom color (orange-red)
+            color: "white", // ✅ Text color
+            padding: "10px 20px", // ✅ Adjust padding
+            "&:hover": {
+              backgroundColor: "#E64A19", // ✅ Darker color on hover
+            },
+
             mt: 2,
             position: "absolute",
             // bottom: "10px",
