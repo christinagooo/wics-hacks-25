@@ -98,11 +98,25 @@ const JobPost = ({ id, title, reward, description, imageUrl, hirer, skillset, ci
             >
             WANTED
           </Typography> */}
-        <Typography variant="h5" sx={{ fontWeight: "bold", mt: `${360-120}px` }}>
+        <Typography variant="h5" sx={{ 
+          // fontWeight: "bold", 
+          mt: `${360-120}px`, 
+          color: "white", 
+          fontSize: "1.2rem", // ✅ Larger font
+          textShadow: "1px 1px 0 black, -1px 1px 0 black, 1px -1px 0 black, -1px -1px 0 black",
+          fontFamily: "Courier New, monospace",
+        }}>
           {title}
         </Typography>
-        <Typography variant="body1" sx={{ fontStyle: "italic", mt: '3px'}}>
-          Reward: ${reward}
+        <Typography variant="body1" sx={{ 
+          fontWeight: "bold",
+          mt: '3px',
+          color: "white", 
+          fontSize: "2.5rem", // ✅ Larger font
+          textShadow: "1px 1px 0 black, -1px 1px 0 black, 1px -1px 0 black, -1px -1px 0 black",
+          fontFamily: "Courier New, monospace",
+        }}>
+          ${reward}
         </Typography>
         {/* <Button variant="contained" color="error" sx={{ mt: 3 }}>
           View Details
