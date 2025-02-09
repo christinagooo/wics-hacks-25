@@ -5,12 +5,13 @@
 import { useRouter } from 'next/navigation';
 import { Box, Card, CardContent, Typography, Button } from '@mui/material';
 import Listings from '@/components/Listings';
+import { PostType } from '@/lib/enum';
 
 const ActiveJobsHirer = () => {
   return (
     <div>
       <div>ActiveJobsHirer</div>
-      <Listings />
+      <Listings buttonType={2}/>
     </div>
   )
 }

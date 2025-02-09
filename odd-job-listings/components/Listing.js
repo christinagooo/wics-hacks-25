@@ -6,12 +6,43 @@
 
 import { useRouter } from 'next/navigation';
 import { Box, Card, CardContent, Typography, Button } from '@mui/material';
+import { PostType } from '@/lib/enum';
 
-const Listing = ({ id, title, reward }) => {
+const Listing = ({ id, title, reward, buttonType }) => {
   const router = useRouter();
+
   const handleDone = async (id) => {
     return;
   };
+
+  const handleCancel = async (id) => {};
+
+  const renderButton = () => {
+    console.log("buttonType in switch is", buttonType, "type is", typeof buttonType);
+    switch (buttonType.buttonType) {
+      case 2:
+        console.log("active-hirer");
+        return (
+          <Button variant="outlined" color="primary" onClick={handleDone}>
+            Done
+          </Button>
+        );
+      case 3:
+        return (
+          <Button variant="contained" color="error" onClick={handleCancel}>
+            Cancel
+          </Button>
+        );
+      case 1:
+        return null; // No button for active hiree
+
+      default:
+        console.log("Invalid buttonType", buttonType);
+        return null;
+    }
+  };
+
+ 
 
   return (
     <div className="w-full flex justify-center p-4">
@@ -24,11 +55,8 @@ const Listing = ({ id, title, reward }) => {
           <Typography variant="body2" color="text.secondary">
             hello
           </Typography>
-          <Button 
-            onClick={handleDone}
-            variant="contained" color="error" sx={{ mt: 3 }}>
-            Done
-          </Button>
+          
+          {renderButton()}
         </CardContent>
       </Card>
     </div>

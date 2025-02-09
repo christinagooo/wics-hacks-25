@@ -5,15 +5,13 @@ import PendingJobsHirer from '../../components/PendingJobsHirer';
 import ActiveJobsHiree from '../../components/ActiveJobsHiree';
 import ActiveJobsHirer from '../../components/ActiveJobsHirer';
 
-const Listings = () => {
-
+const Listings = async () => {
+  
   return (
     <div className="w-full bg-[#f7e395] items-center p-8">
       <ActiveJobsHiree />
       <ActiveJobsHirer />
       <PendingJobsHirer />
-      
-      
     </div>
   );
 
