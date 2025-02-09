@@ -4,7 +4,7 @@ import { NextResponse } from 'next/server';
 
 export async function POST(req) {
   console.log("add-job POST request received");
-  const { jobId, title, reward, description } = await req.json();
+  const { jobId, title, reward, description, imageUrl } = await req.json();
 
   try {
     const auth = new google.auth.GoogleAuth({
@@ -36,7 +36,7 @@ export async function POST(req) {
       range: `Sheet2!A:E`, // Columns A-E
       valueInputOption: "RAW",
       requestBody: {
-        values: [[jobId, title, reward, description]], // New row data
+        values: [[jobId, title, reward, description, imageUrl]], // New row data
       },
     });
     return Response.json({ message: "Row added successfully!" }, { status: 201 });

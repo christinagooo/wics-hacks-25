@@ -20,7 +20,7 @@ const CreatePostForm = () => {
       const res = await fetch('/api/add-job', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ jobId: 1, title: jobTitle, reward: compensation, description: jobDescription}),
+        body: JSON.stringify({ jobId: crypto.randomUUID(), title: jobTitle, reward: compensation, description: jobDescription, imageUrl: imageUrl }),
       });
       if (res.ok) {
         alert('Job accepted!');
