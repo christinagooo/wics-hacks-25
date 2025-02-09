@@ -1,12 +1,19 @@
 "use client"; // JobPost is a client component
 
 import { useRouter } from 'next/navigation';
-import { Card, CardContent, Typography, Button } from '@mui/material';
+import { Card, CardContent, Typography, Button, Modal } from '@mui/material';
 import { useState } from 'react';
+import JobPostDetails from './JobPostDetails';
 
-const JobPost = ({ id, title, reward, description }) => {
+const JobPost = ({ id, title, reward, description, imageUrl }) => {
   const router = useRouter();
   const [isAccepting, setIsAccepting] = useState(false);
+  const [isAccepted, setIsAccepted] = useState(false);
+
+  const [openCardModal, setOpenCardModal] = useState(false);
+
+  // const handleOpenCardModal = () => setOpenCardModal(true);
+  // const handleCloseCardModal = () => setOpenCardModal(false);
 
   const handleAccept = async (e) => {
     e.stopPropagation(); // prevent the card's onClick (if any) from firing
@@ -30,10 +37,12 @@ const JobPost = ({ id, title, reward, description }) => {
       alert('An error occurred.');
     } finally {
       setIsAccepting(false);
+      setIsAccepted(true);
     }
   };
 
   return (
+    <>
     <Card
       sx={{
         width: 280,
@@ -48,9 +57,10 @@ const JobPost = ({ id, title, reward, description }) => {
         "&:hover": { transform: "scale(1.05)" },
       }}
       onClick={() =>
-        router.push(
-          `/job-detail?title=${encodeURIComponent(title)}&reward=${encodeURIComponent(reward)}&description=${encodeURIComponent(description)}`
-        )
+        setOpenCardModal(true)
+        // router.push(
+        //   `/job-detail?title=${encodeURIComponent(title)}&reward=${encodeURIComponent(reward)}&description=${encodeURIComponent(description)}`
+        // )
       }
     >
       <CardContent>
@@ -71,12 +81,33 @@ const JobPost = ({ id, title, reward, description }) => {
           color="primary"
           sx={{ mt: 2 }}
           onClick={handleAccept}
-          disabled={isAccepting}
+          disabled={isAccepting | isAccepted }
         >
-          {isAccepting ? "Accepting..." : "Accept"}
+          {isAccepting ? "Accepting..." : (isAccepted ? "Accepted" : "Accept")}
         </Button>
       </CardContent>
     </Card>
+    <Modal
+      open={openCardModal}
+      onClose={() => setOpenCardModal(false)}
+      aria-labelledby="modal-modal-title"
+      aria-describedby="modal-modal-description"
+    >
+      <JobPostDetails
+        id={id}
+        title={title}
+        reward={reward}
+        description={description}
+        imageUrl={imageUrl}
+        isAccepting={isAccepting}
+        setIsAccepting={setIsAccepting}
+        isAccepted={isAccepted}
+        setIsAccepted={setIsAccepted}
+        // handleAccept={handleAccept}
+      />
+    </Modal>
+  </>
+
   );
 };
 
