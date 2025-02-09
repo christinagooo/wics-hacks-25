@@ -114,6 +114,7 @@ const JobPostDetails = ({
               fontSize: "1.5rem",
               fontWeight: "bold",
               color: "#ff7a5c",
+              textAlign: "left",
               transition: 'transform 0.2s ease-in-out',
               '&:hover': { transform: 'scale(1.05)' },
             }}>
@@ -123,8 +124,9 @@ const JobPostDetails = ({
             {/* Job Description */}
             <Typography variant="body2" className="mt-2 text-gray-700" sx={{
               fontFamily: "Courier New, monospace",
-              fontSize: "1.2rem",
+              fontSize: "1rem",
               color: "black",
+              textAlign: "left",
               transition: 'transform 0.2s ease-in-out',
               '&:hover': { transform: 'scale(1.05)' },
             }}>
@@ -136,10 +138,12 @@ const JobPostDetails = ({
               fontFamily: "Courier New, monospace",
               fontSize: "1.2rem",
               color: "black",
+              mt: 2,
+              textAlign: "left",
               transition: 'transform 0.2s ease-in-out',
               '&:hover': { transform: 'scale(1.05)' },
             }}>
-              Reward: ${reward}
+              ${reward}
             </Typography>
 
           {/* Accept Button */}

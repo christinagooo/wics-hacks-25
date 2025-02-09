@@ -78,6 +78,7 @@ const JobPost = ({ id, title, reward, description, imageUrl, hirer, skillset, ci
         height={360*.97}
         style={{
           position: 'absolute',
+          ml: '2px',
         }}
       />
        <CardContent
@@ -100,20 +101,28 @@ const JobPost = ({ id, title, reward, description, imageUrl, hirer, skillset, ci
           </Typography> */}
         <Typography variant="h5" sx={{ 
           // fontWeight: "bold", 
-          mt: `${360-120}px`, 
+          mt: `${360-140}px`, 
           color: "white", 
+          fontWeight: "bold",
           fontSize: "1.2rem", // ✅ Larger font
           textShadow: "1px 1px 0 black, -1px 1px 0 black, 1px -1px 0 black, -1px -1px 0 black",
+          // fontFamily: "Maiden Orange, serif"
           fontFamily: "Courier New, monospace",
+
+          // display: "flex",
+          // flexDirection: "column-reverse", // ✅ Makes text grow from bottom-up
+          // alignItems: "flex-end", // ✅ Aligns text to the bottom
         }}>
           {title}
         </Typography>
         <Typography variant="body1" sx={{ 
           fontWeight: "bold",
-          mt: '3px',
+          // mt: '2px',
+          mr: '10px',
           color: "white", 
           fontSize: "2.5rem", // ✅ Larger font
           textShadow: "1px 1px 0 black, -1px 1px 0 black, 1px -1px 0 black, -1px -1px 0 black",
+          // fontFamily: "Ewert, serif",
           fontFamily: "Courier New, monospace",
         }}>
           ${reward}
@@ -136,8 +145,6 @@ const JobPost = ({ id, title, reward, description, imageUrl, hirer, skillset, ci
             "&:hover": {
               backgroundColor: "#E64A19", // ✅ Darker color on hover
             },
-
-            mt: 2,
             position: "absolute",
             // bottom: "10px",
             opacity: hovered | isAccepted ? 1 : 0, // Start hidden

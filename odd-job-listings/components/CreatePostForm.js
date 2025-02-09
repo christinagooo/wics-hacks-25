@@ -45,8 +45,10 @@ const CreatePostForm = () => {
         }),
       });
       if (res.ok) {
-        // Redirect to the home page after successful post.
-        router.push('/');
+        alert('Job accepted!');
+        // Optionally, refresh the page or remove the job from local state
+        // e.g., router.refresh() if using Next.js 13 App Router.
+        router.push('/')
       } else {
         const data = await res.json();
         alert('Error posting job: ' + data.error);
@@ -61,54 +63,88 @@ const CreatePostForm = () => {
   
 
   return (
-    <div className="flex flex-col items-center justify-center bg-gray-100 p-8">
-      <h1>Create Post</h1>
+    
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-8">
+      {/* Form Card */}
       <Box
         component="form"
         onSubmit={handlePost}
         sx={{
-          justifyContent: 'center',
-          alignItems: 'center',
-          backgroundColor: '#f5f5f5',
-          padding: 8,
-          display: 'flex',
-          flexDirection: 'column',
-          gap: 2,
+          maxWidth: 500,
+          width: "100%",
+          backgroundColor: "#fff",
+          padding: 6,
+          borderRadius: 3,
+          boxShadow: "0px 5px 15px rgba(0, 0, 0, 0.2)",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          gap: 3,
         }}
       >
+        <h1
+          style={{
+            fontFamily: "Courier New, monospace",
+            color: "#ff7a5c",
+            fontWeight: "bold",
+            fontSize: "2rem",
+            marginBottom: "10px",
+          }}
+        >
+          Yeehire someone
+        </h1>
+
+        {/* Job Title */}
         <FormControl fullWidth>
-          <FormLabel>Job Title</FormLabel>
+          <FormLabel sx={{ fontWeight: "bold", fontFamily: "Courier New, monospace",
+            color: "#ff7a5c", mb: 1 }}>Job title</FormLabel>
           <TextField
             placeholder="IKEA furniture builder"
+            variant="outlined"
             required
-            onChange={(e) => setJobTitle(e.target.value)}  
+            onChange={(e) => setJobTitle(e.target.value)}
+            sx={{ backgroundColor: "#f9f9f9", borderRadius: 1 }}
           />
         </FormControl>
 
+        {/* Compensation */}
         <FormControl fullWidth>
-          <FormLabel>Compensation</FormLabel>
+          <FormLabel sx={{ fontWeight: "bold", fontFamily: "Courier New, monospace",
+            color: "#ff7a5c", mb: 1 }}>Compensation</FormLabel>
           <TextField
-            placeholder="$10"
+            placeholder="$10/hr"
+            variant="outlined"
             required
-            onChange={(e) => setCompensation(e.target.value)}  
+            onChange={(e) => setCompensation(e.target.value)}
+            sx={{ backgroundColor: "#f9f9f9", borderRadius: 1 }}
           />
         </FormControl>
 
+        {/* Job Description */}
         <FormControl fullWidth>
-          <FormLabel>Job Description</FormLabel>
+          <FormLabel sx={{ fontWeight: "bold", fontFamily: "Courier New, monospace",
+            color: "#ff7a5c", mb: 1 }}>Job description</FormLabel>
           <TextField
             placeholder="I need a guy who can build me some cabinets"
+            variant="outlined"
+            multiline
+            rows={3}
             required
-            onChange={(e) => setJobDescription(e.target.value)}  
+            onChange={(e) => setJobDescription(e.target.value)}
+            sx={{ backgroundColor: "#f9f9f9", borderRadius: 1 }}
           />
         </FormControl>
 
+        {/* Image URL */}
         <FormControl fullWidth>
-          <FormLabel>Image URL</FormLabel>
+          <FormLabel sx={{ fontWeight: "bold", fontFamily: "Courier New, monospace",
+            color: "#ff7a5c", mb: 1 }}>Image</FormLabel>
           <TextField
             placeholder="an-image-url.com"
+            variant="outlined"
             required
-            onChange={(e) => setImageUrl(e.target.value)}  
+            onChange={(e) => setImageUrl(e.target.value)}
+            sx={{ backgroundColor: "#f9f9f9", borderRadius: 1 }}
           />
         </FormControl>
 
@@ -139,33 +175,56 @@ const CreatePostForm = () => {
             onChange={(e) => setCity(e.target.value)}  
           />
         </FormControl>
-        
+
+        {/* Image Preview */}
         {imageUrl ? (
-          <img src={imageUrl} 
-            alt="Dynamic Image" 
-            className="w-32 h-32" />
+          <Box
+            sx={{
+              width: 120,
+              height: 120,
+              borderRadius: 2,
+              overflow: "hidden",
+              boxShadow: "0px 3px 8px rgba(0, 0, 0, 0.2)",
+            }}
+          >
+            <img
+              src={imageUrl}
+              alt="Job Preview"
+              className="w-full h-full object-cover"
+            />
+          </Box>
         ) : (
-          <p>No image available</p>
+          <Typography variant="body2" sx={{ color: "#777" }}>
+            No image available
+          </Typography>
         )}
 
-        <Button 
+        {/* Submit Button */}
+        <Button
           type="submit"
-          variant="contained" 
-          sx={{ 
-            marginTop: 2, 
-            padding: 1, 
-            backgroundColor: "#697268",
-            color: "#fff", 
+          variant="contained"
+          sx={{
+            marginTop: 2,
+            padding: "12px 24px",
+            backgroundColor: "#FF5733",
+            color: "#fff",
             fontWeight: "bold",
-            fontFamily: "DM Sans",
-            marginBottom: 2
+            textTransform: "uppercase",
+            borderRadius: 2,
+            transition: "0.3s",
+            "&:hover": {
+              backgroundColor: "#E64A19",
+              transform: "scale(1.05)",
+            },
+            
           }}
-          disabled={isPosting}
+          onClick={handlePost} // TODO: create post
         >
           Create Post
         </Button>
       </Box>
     </div>
+
   );
 };
 
