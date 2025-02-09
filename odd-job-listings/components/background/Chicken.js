@@ -8,14 +8,18 @@ import Image from "next/image";
 const chickenRunFrames = ["/chicken/chikn1.png", "/chicken/chikn2.png", "/chicken/chikn3.png"];
 // const chickenJumpFrame = "/chicken/jump.png"; // Special frame for jumping
 
-export default function RunningChicken( {randomY} ) {
+export default function Chicken( {randomY} ) {
   const chickenRef = useRef(null);
   const [currentFrame, setCurrentFrame] = useState(0);
   const [jumping, setJumping] = useState(false);
-
+  const [aRandomY, setRandomY] = useState(randomY);
   useEffect(() => {
     const chicken = chickenRef.current;
     const screenWidth = window.innerWidth;
+    const pageHeight = document.documentElement.scrollHeight;
+    const randomDelay = Math.random() * 3; // ✅ Random delay between 0-3 seconds
+
+    
 
     // 🏃 Running Across the Screen
     // Create the timeline once when the component mounts
@@ -27,7 +31,13 @@ export default function RunningChicken( {randomY} ) {
         duration: 5,
         ease: "linear",
         repeat: -1,            // Infinite looping
-        onRepeat: () => gsap.set(chicken, { x: screenWidth + 100 }), // Reset to the right edge
+        // delay: randomDelay,    // Random delay
+        onRepeat: () => {
+          let rand = Math.floor(Math.random() * (pageHeight-50)) + 50
+          setRandomY(rand);
+          console.log("randomY", rand);
+          gsap.set(chicken, { x: screenWidth + 100 })
+        }, // Reset to the right edge
       }
     );
 
@@ -41,6 +51,7 @@ export default function RunningChicken( {randomY} ) {
     // 🎮 Handle Jumping with Arrow Key
     const handleKeyPress = (event) => {
       if (event.key === "ArrowUp" && !jumping) {
+        event.preventDefault(); // prevent scrolling
         setJumping(true);
         gsap.to(chicken, {
           y: "-50px",
@@ -64,7 +75,11 @@ export default function RunningChicken( {randomY} ) {
   }, []); // Removed 'jumping' from dependencies so the effect runs only once
 
   return (
-    <div ref={chickenRef} className="" style={{bottom: randomY}}>
+    <div ref={chickenRef} className="" 
+      style={{
+        position: "absolute",
+        top: `${aRandomY}px`
+      }}>
       <Image
         // If you want to show a different frame while jumping, you could conditionally render here.
         // For now, we're just cycling through the run frames.
@@ -73,6 +88,7 @@ export default function RunningChicken( {randomY} ) {
         width={100}
         height={80}
         priority
+        
 
       />
     </div>

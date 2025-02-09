@@ -31,8 +31,11 @@ export default function RootLayout({
       >
         <div className="bg-pattern">
           {/* Background Container */}
-            <div className="absolute inset-0 -z-10">
-              {/* <Background /> */}
+            <div className="absolute inset-0 w-full h-full -z-10 bg-transparent"
+              style={{
+                top:"1000px"
+              }}>
+              <Background />
             </div>
 
             {/* Main Content (Above Chicken) */}
