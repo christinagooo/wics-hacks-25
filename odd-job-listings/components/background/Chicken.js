@@ -5,7 +5,7 @@ import gsap from "gsap";
 import Image from "next/image";
 
 // 🎨 Define Chicken Animation Frames
-const chickenRunFrames = ["/chicken/chikn1.png", "/chicken/chikn2.png", "/chicken/chikn3.png"];
+const chickenRunFrames = ["/chicken/chikn1.png", "/chicken/chikn2.png", "/chicken/chikn3.png", "/chicken/chikn4.png"];
 // const chickenJumpFrame = "/chicken/jump.png"; // Special frame for jumping
 
 export default function Chicken( {randomY} ) {
@@ -28,7 +28,7 @@ export default function Chicken( {randomY} ) {
       { x: screenWidth + 100 }, // Start off-screen on the right
       {
         x: -150,               // End off-screen on the left
-        duration: 5,
+        duration: Math.floor(Math.random() * (5)) + 5,
         ease: "linear",
         repeat: -1,            // Infinite looping
         // delay: randomDelay,    // Random delay
